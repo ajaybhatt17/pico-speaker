@@ -37,15 +37,26 @@ var speaker = (function() {
             });
             return deferred.promise;
         },
-        export: function(text,filepath) {
+        exportText: function(text,filepath) {
             var deferred = Q.defer();
             var fileName = filepath;
 
-            if(CONFIG.AUDIO_DEVICE) {
-                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text + '"';
-            } else {
-                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text + '"';
-            }
+            var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text + '"';
+            exec(cmd, function(error) {
+                // command output is in stdout
+                if(error) {
+                    console.log('error while executing command ', cmd);
+                }
+                lastText = text;
+                deferred.resolve();
+            });
+            return deferred.promise;
+        },
+        exportFile: function(fileToExport,filepath) {
+            var deferred = Q.defer();
+            var fileName = filepath;
+
+            var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' -i ' + fileToExport;
             exec(cmd, function(error) {
                 // command output is in stdout
                 if(error) {
