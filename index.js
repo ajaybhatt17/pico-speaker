@@ -42,9 +42,9 @@ var speaker = (function() {
             var fileName = filepath;
 
             if(CONFIG.AUDIO_DEVICE) {
-                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text;
+                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text + '"';
             } else {
-                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text;
+                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text + '"';
             }
             exec(cmd, function(error) {
                 // command output is in stdout
