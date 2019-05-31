@@ -37,6 +37,25 @@ var speaker = (function() {
             });
             return deferred.promise;
         },
+        export: function(text,filepath) {
+            var deferred = Q.defer();
+            var fileName = filepath;
+
+            if(CONFIG.AUDIO_DEVICE) {
+                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text;
+            } else {
+                var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' " ' + text;
+            }
+            exec(cmd, function(error) {
+                // command output is in stdout
+                if(error) {
+                    console.log('error while executing command ', cmd);
+                }
+                lastText = text;
+                deferred.resolve();
+            });
+            return deferred.promise;
+        },
         repeat: function() {
             this.speak(lastText);
         },
