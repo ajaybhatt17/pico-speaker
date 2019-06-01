@@ -62,7 +62,6 @@ var speaker = (function() {
                 if(error) {
                     console.log('error while executing command ', cmd);
                 }
-                lastText = text;
                 deferred.resolve();
             });
             return deferred.promise;
