@@ -56,7 +56,7 @@ var speaker = (function() {
             var deferred = Q.defer();
             var fileName = filepath;
 
-            var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + '"$(cat '+fileToExport+')"';
+            var cmd = 'pico2wave -l ' + CONFIG.LANGUAGE + ' -w ' + fileName + ' "$(cat '+fileToExport+')"';
             exec(cmd, function(error) {
                 // command output is in stdout
                 if(error) {
